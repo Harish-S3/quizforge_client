@@ -7,7 +7,22 @@ import Leaderboard from './components/Leaderboard';
 import Modal from './components/Modal';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const socket = io('https://quizforge-server.onrender.com');
+const socket = io('https://quizforge-server.onrender.com'); // Your live server URL
+
+// --- THE NEW ROYAL SEAL COMPONENT ---
+const Footer = () => {
+  return (
+    <footer className="footer-watermark">
+      <p>
+        © 2025 | Forged by{' '}
+        <a href="https://www.linkedin.com/in/harish-s3/" target="_blank" rel="noopener noreferrer">
+          Harish
+        </a>
+      </p>
+    </footer>
+  );
+};
+
 
 function App() {
   const [page, setPage] = useState('home');
@@ -54,6 +69,7 @@ function App() {
     socket.on('quiz-generated-successfully', onQuizGenerated);
 
     return () => {
+      // Cleanup all listeners
       socket.off('connect', onConnect);
       socket.off('room-created', onRoomUpdate);
       socket.off('join-success', onRoomUpdate);
@@ -112,6 +128,8 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* --- ADD THE FOOTER HERE, OUTSIDE THE ANIMATION --- */}
+      <Footer />
     </div>
   );
 }
