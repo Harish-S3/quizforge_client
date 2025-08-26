@@ -7,7 +7,7 @@ import Leaderboard from './components/Leaderboard';
 import Modal from './components/Modal';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const socket = io('http://localhost:4000');
+const socket = io('https://quizforge-server.onrender.com');
 
 function App() {
   const [page, setPage] = useState('home');

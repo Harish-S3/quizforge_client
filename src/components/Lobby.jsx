@@ -59,7 +59,7 @@ function Lobby({ roomCode, users, hostId, socketId, socket }) {
         const formData = new FormData();
         formData.append('file', file);
         Object.keys(settings).forEach(key => formData.append(key, settings[key]));
-        fetch('http://localhost:4000/generate-quiz-from-file', { method: 'POST', body: formData })
+        fetch('https://quizforge-server.onrender.com/generate-quiz-from-file', { method: 'POST', body: formData })
             .catch(() => setIsGenerating(false));
     } else { // 'text'
         if (!pastedText.trim()) {
@@ -67,7 +67,7 @@ function Lobby({ roomCode, users, hostId, socketId, socket }) {
             socket.emit('show-error', "Please paste some text first!");
             return;
         }
-        fetch('http://localhost:4000/generate-quiz-from-text', {
+        fetch('https://quizforge-server.onrender.com/generate-quiz-from-text', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ text: pastedText, ...settings }),
         }).catch(() => setIsGenerating(false));
