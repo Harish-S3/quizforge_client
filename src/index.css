@@ -1,0 +1,29 @@
+:root {
+  --font-primary: 'Poppins', sans-serif;
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-primary: #8A2BE2; /* A vibrant purple */
+  --color-secondary: #00BFFF; /* A bright blue */
+  --color-text: #EAEAEA;
+  --color-text-muted: #A0A0A0;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+  --glow-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* We will create a new App.css, so clear this for now */
