@@ -6,6 +6,7 @@ import Quiz from './components/Quiz';
 import Leaderboard from './components/Leaderboard';
 import Modal from './components/Modal';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Analytics } from "@vercel/analytics/next"
 
 const socket = io('https://quizforge-server.onrender.com'); // Your live server URL
 
