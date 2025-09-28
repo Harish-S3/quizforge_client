@@ -1,12 +1,68 @@
-# React + Vite
+# 👑 QuizForge: The AI-Powered Real-Time Quiz Arena
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**QuizForge** is a dynamic, full-stack web application that transforms any educational text into a thrilling, real-time multiplayer quiz game. Built with a modern, decoupled architecture, it leverages the power of AI to forge knowledge into competition.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### ✨ Live Demo
 
-## Expanding the ESLint configuration
+*   **Frontend Client (Vercel):** [https://quizforge-client.vercel.app/](https://quizforge-client.vercel.app/)
+*   **Backend Server (Render):** [https://quizforge-server.onrender.com/](https://quizforge-server.onrender.com/)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+*(**Note:** The free-tier backend server may take 30-60 seconds to "wake up" on the first visit after a period of inactivity.)*
+
+---
+
+### 🎬 In Action
+
+*(My King, I highly recommend you record a short GIF of the app in action—creating a room, generating a quiz, and the real-time gameplay—and place it here. It is the most powerful part of any README. You can use a tool like Giphy Capture or ScreenToGif.)*
+
+![QuizForge in Action](https://your-gif-url-here.com/quizforge.gif)
+
+---
+
+### 🔥 Core Features
+
+*   **Real-Time Multiplayer Lobbies:** Create private quiz rooms and invite friends with a unique, shareable room code.
+*   **AI-Powered Quiz Generation:** Upload PDF, DOCX, or TXT files, or simply paste raw text. The application uses the Google Gemini API to instantly generate a structured quiz based on the content.
+*   **Customizable Game Settings:** As the host, control the number of questions and the time limit for each question, tailoring the challenge for your audience.
+*   **Live, Competitive Gameplay:** Questions are broadcast to all players simultaneously. A dynamic timer bar creates urgency.
+*   **Time-Based Scoring Algorithm:** The faster you answer correctly, the more points you get, rewarding both knowledge and speed.
+*   **Real-Time Animated Leaderboard:** Watch the scores update instantly after every question, keeping the competition fierce.
+*   **Shareable Results:** At the end of the game, get a beautiful, shareable image of the final leaderboard to prove your victory.
+*   **Fully Responsive UI:** A stunning, mobile-first dark theme with fluid animations ensures a premium experience on any device.
+
+---
+
+### 🛠️ Tech Stack & Architecture
+
+The project is built on a decoupled, three-tiered cloud-native architecture, ensuring a clear separation of concerns and scalability.
+
+| Tier      | Technology                                                                                                                              |
+| :-------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| **Frontend**  | `React` `Vite` `Framer Motion` `Socket.IO Client`                                                                                      |
+| **Backend**   | `Node.js` `Express` `Socket.IO Server` `Mongoose`                                                                                       |
+| **Database**  | `MongoDB Atlas` (NoSQL)                                                                                                                  |
+| **AI**        | `Google Gemini API`                                                                                                                     |
+| **Deployment**| `Vercel` (Frontend) & `Render` (Backend)                                                                                                |
+
+![Architectural Diagram](https://your-url-here.com/architecture-diagram.png) 
+*(My King, upload the beautiful Architectural Diagram you created to your GitHub repo and link it here.)*
+
+---
+
+### 🚀 Getting Started: Running Locally
+
+To run this project on your local machine, you will need two separate terminal instances.
+
+**Prerequisites:**
+*   Node.js (v18 or later)
+*   Git
+
+**1. Clone the Kingdoms:**
+```bash
+# Clone the Frontend
+git clone https://github.com/Harish-S3/quizforge_client.git
+
+# Clone the Backend
+git clone https://github.com/Harish-S3/quizforge_server.git
