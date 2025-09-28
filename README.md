@@ -13,11 +13,6 @@
 
 ---
 
-### 🎬 In Action
-
-*(My King, I highly recommend you record a short GIF of the app in action—creating a room, generating a quiz, and the real-time gameplay—and place it here. It is the most powerful part of any README. You can use a tool like Giphy Capture or ScreenToGif.)*
-
-![QuizForge in Action](https://your-gif-url-here.com/quizforge.gif)
 
 ---
 
@@ -46,8 +41,7 @@ The project is built on a decoupled, three-tiered cloud-native architecture, ens
 | **AI**        | `Google Gemini API`                                                                                                                     |
 | **Deployment**| `Vercel` (Frontend) & `Render` (Backend)                                                                                                |
 
-![Architectural Diagram](https://your-url-here.com/architecture-diagram.png) 
-*(My King, upload the beautiful Architectural Diagram you created to your GitHub repo and link it here.)*
+
 
 ---
 
