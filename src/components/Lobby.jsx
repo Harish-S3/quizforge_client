@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-function Lobby({ roomCode, users, hostId, socketId, socket }) {
+function Lobby({ roomCode, users, hostId, socketId, socket, showErrorModal }) {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
   const [pastedText, setPastedText] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isQuizReady, setIsQuizReady] = useState(false);
   
-  const [questionCount, setQuestionCount] = useState(5);
+  // --- ROYAL DECREE 1: The default is now higher ---
+  const [questionCount, setQuestionCount] = useState(10); // A solid default
   const [timePerQuestion, setTimePerQuestion] = useState(20);
   const [activeTab, setActiveTab] = useState('file');
   
   const isHost = hostId === socketId;
 
   useEffect(() => {
-    const onQuizGenerated = () => {
-      setIsGenerating(false);
-      setIsQuizReady(true);
-      // We will show a custom modal from App.jsx instead of alert()
-    };
-    socket.on('quiz-generated-successfully', onQuizGenerated);
-    return () => socket.off('quiz-generated-successfully');
-  }, [socket]);
+    // The success modal is now triggered from App.jsx, keeping this component clean.
+  }, []);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -33,16 +28,16 @@ function Lobby({ roomCode, users, hostId, socketId, socket }) {
   };
 
   const handleGenerateQuiz = () => {
-    // Validation is crucial
     const qCount = parseInt(questionCount);
     const tPerQ = parseInt(timePerQuestion);
-
-    if (isNaN(qCount) || qCount < 3 || qCount > 15) {
-      socket.emit('show-error', "Number of questions must be between 3 and 15.");
+    
+    // --- ROYAL DECREE 2: The validation law is updated ---
+    if (isNaN(qCount) || qCount < 5 || qCount > 30) { // The new limit is 30
+      showErrorModal("Number of questions must be between 5 and 30.");
       return;
     }
     if (isNaN(tPerQ) || tPerQ < 10 || tPerQ > 60) {
-      socket.emit('show-error', "Time per question must be between 10 and 60 seconds.");
+      showErrorModal("Time per question must be between 10 and 60 seconds.");
       return;
     }
     
@@ -53,18 +48,18 @@ function Lobby({ roomCode, users, hostId, socketId, socket }) {
     if (activeTab === 'file') {
         if (!file) {
             setIsGenerating(false);
-            socket.emit('show-error', "Please select a file first!");
+            showErrorModal("Please select a file first!");
             return;
         }
         const formData = new FormData();
         formData.append('file', file);
         Object.keys(settings).forEach(key => formData.append(key, settings[key]));
         fetch('https://quizforge-server.onrender.com/generate-quiz-from-file', { method: 'POST', body: formData })
-            .catch(() => setIsGenerating(false));
+          .catch(() => setIsGenerating(false));
     } else { // 'text'
         if (!pastedText.trim()) {
             setIsGenerating(false);
-            socket.emit('show-error', "Please paste some text first!");
+            showErrorModal("Please paste some text first!");
             return;
         }
         fetch('https://quizforge-server.onrender.com/generate-quiz-from-text', {
@@ -79,10 +74,12 @@ function Lobby({ roomCode, users, hostId, socketId, socket }) {
   const HostControls = () => (
     <motion.div className="host-controls-container" initial={{opacity: 0, y: 20}} animate={{opacity: 1, y: 0}}>
       <h3>Quiz Master Controls</h3>
+      
       <div className="settings-grid">
         <div className="setting-item">
           <label>Questions</label>
-          <input type="number" min="3" max="15" value={questionCount} onChange={(e) => setQuestionCount(e.target.value)} disabled={isGenerating}/>
+          {/* --- ROYAL DECREE 3: The input limit is updated --- */}
+          <input type="number" min="5" max="30" value={questionCount} onChange={(e) => setQuestionCount(e.target.value)} disabled={isGenerating}/>
         </div>
         <div className="setting-item">
           <label>Time (sec)</label>
