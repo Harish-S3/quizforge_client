@@ -13,8 +13,9 @@ const socket = io('https://quizforge-server.onrender.com');
 const Footer = () => {
   return (
     <footer className="footer-watermark">
+      {/* --- CHANGE 1: "Forged by" updated --- */}
       <p>
-        © 2025 | Forged by{' '}
+        © 2025 | A project by{' '}
         <a href="https://www.linkedin.com/in/harish-s3/" target="_blank" rel="noopener noreferrer">
           Harish
         </a>
@@ -52,17 +53,11 @@ function App() {
   useEffect(() => {
     const onConnect = () => setSocketId(socket.id);
     
-    // --- THIS IS THE NEW, SUPERIOR LISTENER ---
-    // It handles creating, joining, and user list updates all in one event.
     const onRoomUpdate = (data) => {
-        setRoomData(data); // Always update with the full, correct room data
-        
-        // Logic to prevent being kicked from the quiz back to the lobby
+        setRoomData(data);
         if (page !== 'quiz') { 
             setPage('lobby');
         }
-
-        // Only reset quiz readiness when first entering a lobby from home
         if (page === 'home' && data.hostId === socketId) {
             setIsQuizReady(false);
         }
@@ -75,12 +70,12 @@ function App() {
     const onUpdateLeaderboard = (updatedUsers) => setRoomData(prevData => ({ ...prevData, users: updatedUsers }));
     const onError = (data) => showErrorModal(data.message);
     const onQuizGenerated = () => {
-        showSuccessModal("Your quiz has been forged! You can now start the game when you're ready.");
+        showSuccessModal("Your quiz is ready! You can now start the game.");
         setIsQuizReady(true);
     };
 
     socket.on('connect', onConnect);
-    socket.on('room-updated', onRoomUpdate); // Replaces room-created, join-success, and update-user-list
+    socket.on('room-updated', onRoomUpdate);
     socket.on('error', onError);
     socket.on('game-started', onGameStarted);
     socket.on('update-leaderboard', onUpdateLeaderboard);
@@ -94,12 +89,14 @@ function App() {
       socket.off('update-leaderboard', onUpdateLeaderboard);
       socket.off('quiz-generated-successfully', onQuizGenerated);
     };
-  }, [page, socketId]); // Added page and socketId as dependencies for robust state logic
+  }, [page, socketId]);
   
   const HomePage = (
       <motion.div className="homepage-container" initial={{opacity: 0, scale: 0.8}} animate={{opacity: 1, scale: 1}}>
-        <h1>QuizForge</h1>
-        <p>Forge knowledge into competition.</p>
+        {/* --- CHANGE 2: The name is updated here --- */}
+        <h1>QuizPop</h1>
+        {/* --- CHANGE 3: The tagline is updated here --- */}
+        <p>Turn any text into a live quiz game.</p>
         <input type="text" placeholder="Enter your username" value={username} onChange={(e) => setUsername(e.target.value)} />
         <div className="home-actions">
           <input type="text" placeholder="Enter Room Code" value={roomCodeInput} onChange={(e) => setRoomCodeInput(e.target.value)} />
